@@ -1,10 +1,8 @@
-@Library('jenkins-shared-library') _
-
 pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_IMAGE         = "nithi1230/devsecops-app"
         DOCKER_TAG           = "${BUILD_NUMBER}"
         SONARQUBE_URL        = "http://sonarqube-server:9000"
@@ -23,16 +21,20 @@ pipeline {
         // ──────────────────────────────────────────────
         stage('Notify Start') {
             steps {
-                slackNotification('STARTED')
+                slackSend channel: '#devsecops-pipeline',
+                    color: '#439FE0',
+                    message: ":rocket: *Pipeline Started*\n*Job:* ${env.JOB_NAME}\n*Build:* #${env.BUILD_NUMBER}"
             }
         }
 
         // ──────────────────────────────────────────────
         // Stage 2: Checkout Source Code
         // ──────────────────────────────────────────────
-        stage('Checkout') {
+        stage('Checkout Source Code') {
             steps {
-                checkout scm
+                git branch: 'main',
+                    credentialsId: 'github-credentials',
+                    url: 'https://github.com/Nithish-ponnusamy/devsecops.git'
             }
         }
 
@@ -190,13 +192,19 @@ pipeline {
     // ──────────────────────────────────────────────
     post {
         success {
-            slackNotification('SUCCESS')
+            slackSend channel: '#devsecops-pipeline',
+                color: '#36A64F',
+                message: ":white_check_mark: *Pipeline Succeeded*\n*Job:* ${env.JOB_NAME}\n*Build:* #${env.BUILD_NUMBER}\n*Duration:* ${currentBuild.durationString.replace(' and counting', '')}"
         }
         failure {
-            slackNotification('FAILURE')
+            slackSend channel: '#devsecops-pipeline',
+                color: '#FF0000',
+                message: ":x: *Pipeline Failed*\n*Job:* ${env.JOB_NAME}\n*Build:* #${env.BUILD_NUMBER}\n*Console:* ${env.BUILD_URL}"
         }
         unstable {
-            slackNotification('UNSTABLE')
+            slackSend channel: '#devsecops-pipeline',
+                color: '#FFA500',
+                message: ":warning: *Pipeline Unstable*\n*Job:* ${env.JOB_NAME}\n*Build:* #${env.BUILD_NUMBER}"
         }
         always {
             cleanWs()
