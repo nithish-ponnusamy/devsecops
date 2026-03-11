@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: devsecops-app
-          image: yourdockerhubuser/devsecops-app:latest
+          image: nithi1230/devsecops-app:latest
           ports:
             - containerPort: 8080
           envFrom:

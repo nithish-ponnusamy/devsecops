@@ -262,5 +262,5 @@ curl -X POST http://<node-ip>:30080/api/v1/tasks \
 kubectl delete -f k8s/ -n devsecops
 
 # Remove Docker images
-docker rmi yourdockerhubuser/devsecops-app:latest
+docker rmi nithi1230/devsecops-app:latest
 ```

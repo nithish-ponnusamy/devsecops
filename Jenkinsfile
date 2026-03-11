@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        DOCKER_IMAGE         = "yourdockerhubuser/devsecops-app"
+        DOCKER_IMAGE         = "nithi1230/devsecops-app"
         DOCKER_TAG           = "${BUILD_NUMBER}"
         SONARQUBE_URL        = "http://sonarqube-server:9000"
         SNYK_TOKEN           = credentials('snyk-api-token')

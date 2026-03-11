@@ -4,6 +4,15 @@
 
 ---
 
+## Git Repository
+
+```bash
+git clone https://github.com/Nithish-ponnusamy/devsecops.git
+cd devsecops
+```
+
+---
+
 ## What This Project Is
 
 A **Task Manager REST API** built with Spring Boot and MongoDB, wrapped in a complete **DevSecOps CI/CD pipeline** that builds, scans for security vulnerabilities, containerizes, and deploys the application automatically.
@@ -414,6 +423,10 @@ devsecops/
 ## Quick Start (Run Locally)
 
 ```bash
+# Clone the repository
+git clone https://github.com/Nithish-ponnusamy/devsecops.git
+cd devsecops
+
 # Start the application with Docker Compose
 docker compose up --build -d
 
