@@ -1,0 +1,28 @@
+# Trivy configuration file
+# Used for both image scanning and Kubernetes config scanning
+
+scan:
+  security-checks:
+    - vuln
+    - config
+    - secret
+
+severity:
+  - HIGH
+  - CRITICAL
+
+format: table
+
+exit-code: 0
+
+timeout: 10m
+
+image:
+  removed-pkgs: false
+  input: ""
+
+vulnerability:
+  type:
+    - os
+    - library
+  ignore-unfixed: false

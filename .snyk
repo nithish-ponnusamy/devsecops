@@ -1,0 +1,4 @@
+# Snyk policy file – customize vulnerability handling
+version: v1.25.0
+ignore: {}
+patch: {}

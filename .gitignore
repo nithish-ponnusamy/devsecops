@@ -1,0 +1,12 @@
+target/
+*.class
+*.jar
+*.log
+*.iml
+.idea/
+.DS_Store
+.env
+*.swp
+*.swo
+node_modules/
+enterprise-devsecops-pipeline/
